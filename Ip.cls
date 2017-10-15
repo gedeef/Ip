@@ -1,6 +1,8 @@
 public class IpAddress{
     private String sIp; //ip as string
     private Double dIp; //ip as double
+    
+    /* @todo Doubles should be longs */
 
     //returns a double from the string 'a.b.c.d' ip representation
     private Double ipFromString(){
