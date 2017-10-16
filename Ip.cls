@@ -2,8 +2,6 @@ public class IpAddress{
     private String sIp; //ip as string
     private Long lIp; //ip as Long
     
-    /* @todo Doubles should be longs */
-
     //returns a Long from the string 'a.b.c.d' ip representation
     private Long ipFromString(){
         String[] elts = sIp.split('\\.');
@@ -28,6 +26,8 @@ public class IpAddress{
       return sIp;
     }
     
+    //return Ip address as a 'g.h.i.j' string with g, h, i , j hex numbers : format [\da-f]{2}
+    // from a.b.c.d string with a, b, c, d integers in range [0,255]
     public String asHexString(){
       String[] elts = sIp.split('\\.');
       String hexIp = '';
@@ -38,6 +38,7 @@ public class IpAddress{
       return hexIp;
     }
     
+    //return the long value of the ip
     public String longToHex( Long num ){
       List<String> symbols = '0123456789ABCDEF'.split('');
       String hex = ''; 
@@ -49,6 +50,7 @@ public class IpAddress{
       return hex;
     }
     
+    //returns wether the ip is in range given by its boundaries specified as arguments
     public Boolean isInRange(IpAddress lowBoundary, IpAddress highBoundary){
         return (this.aLong() >= lowBoundary.asLong()) && (this.asLong() <= highBoundary.asLong());
     }
