@@ -5,10 +5,10 @@ public class IpAddress{
     //returns a Long from the string 'a.b.c.d' ip representation
     private Long ipFromString(){
         String[] elts = sIp.split('\\.');
-        return      Long.valueOf(elts[0]) * Math.pow(255, 3) + 
-                    Long.valueOf(elts[1]) * Math.pow(255, 2) +
-                    Long.valueOf(elts[2]) * Math.pow(255, 1) + //=*255
-                    Long.valueOf(elts[3]) * Math.pow(255, 0);  //=*1 
+        return      Long.valueOf(elts[0]) * (Long)Math.pow(255, 3) + 
+                    Long.valueOf(elts[1]) * (Long)Math.pow(255, 2) +
+                    Long.valueOf(elts[2]) * (Long)Math.pow(255, 1) + //=*255
+                    Long.valueOf(elts[3]) * (Long)Math.pow(255, 0);  //=*1 
     }
 
     //Constructor
@@ -19,7 +19,7 @@ public class IpAddress{
     }
 
     public Long asLong(){
-        return dIp;
+        return lIp;
     }
     
     public String asString(){
@@ -33,7 +33,7 @@ public class IpAddress{
       String hexIp = '';
       for (String elt:elts){
         if (hexIp != '') hexIp+= '.';
-        hexIp += ('0' + longToHex((Long) elt)).right(2);
+        hexIp += ('0' + longToHex(Long.valueOf(elt)).right(2));
       }
       return hexIp;
     }
@@ -45,13 +45,13 @@ public class IpAddress{
       while (true) { 
         hex = symbols[(Integer)Math.mod((num), 16)] + hex; 
         if (Math.floor(num/16)==0) break; 
-        num = Math.floor(num/16); 
+        num = (Long) Math.floor(num/16); 
       }
       return hex;
     }
     
     //returns wether the ip is in range given by its boundaries specified as arguments
     public Boolean isInRange(IpAddress lowBoundary, IpAddress highBoundary){
-        return (this.aLong() >= lowBoundary.asLong()) && (this.asLong() <= highBoundary.asLong());
+        return (this.asLong() >= lowBoundary.asLong()) && (this.asLong() <= highBoundary.asLong());
     }
 }
