@@ -1,26 +1,26 @@
 public class IpAddress{
     private String sIp; //ip as string
-    private Double dIp; //ip as double
+    private Long lIp; //ip as Long
     
     /* @todo Doubles should be longs */
 
-    //returns a double from the string 'a.b.c.d' ip representation
-    private Double ipFromString(){
+    //returns a Long from the string 'a.b.c.d' ip representation
+    private Long ipFromString(){
         String[] elts = sIp.split('\\.');
-        return      Double.valueOf(elts[0]) * Math.pow(255, 3) + 
-                    Double.valueOf(elts[1]) * Math.pow(255, 2) +
-                    Double.valueOf(elts[2]) * Math.pow(255, 1) + //=*255
-                    Double.valueOf(elts[3]) * Math.pow(255, 0);  //=*1 
+        return      Long.valueOf(elts[0]) * Math.pow(255, 3) + 
+                    Long.valueOf(elts[1]) * Math.pow(255, 2) +
+                    Long.valueOf(elts[2]) * Math.pow(255, 1) + //=*255
+                    Long.valueOf(elts[3]) * Math.pow(255, 0);  //=*1 
     }
 
     //Constructor
     public IpAddress(String ip){
         //check 'a.b.c.d' format here ?
         sIp = ip;
-        dIp = this.ipFromString();
+        lIp = this.ipFromString();
     }
 
-    public Double asDouble(){
+    public Long asLong(){
         return dIp;
     }
     
@@ -50,6 +50,6 @@ public class IpAddress{
     }
     
     public Boolean isInRange(IpAddress lowBoundary, IpAddress highBoundary){
-        return (this.asDouble() >= lowBoundary.asDouble()) && (this.asDouble() <= highBoundary.asDouble());
+        return (this.aLong() >= lowBoundary.asLong()) && (this.asLong() <= highBoundary.asLong());
     }
 }
